@@ -8,11 +8,33 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by Winston on 1/30/16.
  */
 public class AutoBlueOp extends LinearOpMode {
+    final static double ZIP_MIN_RANGE = 0.00;
+    final static double ZIP_MAX_RANGE = 0.50;
+
+    final static double COLLECT_MIN_RANGE = 0.00;
+    final static double COLLECT_MAX_RANGE = 0.50;
+
+    final static double DUMP_L_LEFT = 0.00;
+    final static double DUMP_L_CLOSE = 0.50;
+    final static double DUMP_L_RIGHT = 1.00;
+
+    final static double DUMP_R_LEFT = 0.00;
+    final static double DUMP_R_CLOSE = 0.50;
+    final static double DUMP_R_RIGHT = 1.00;
+
+    // position of the zip servo.
+    boolean zipBool;
+
+    // position of the dump servos
+    double dumpLeftPos;
+    double dumpRightPos;
+
     DcMotor motorRight;
     DcMotor motorLeft;
     DcMotor ballCollect;
     DcMotor extension;
-    Servo dump;
+    Servo dumpLeft;
+    Servo dumpRight;
     Servo zip;
 
     double TURN_RADIUS=1.417;
@@ -42,8 +64,14 @@ public class AutoBlueOp extends LinearOpMode {
         extension = hardwareMap.dcMotor.get("extension");
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        zip = hardwareMap.servo.get("dump");
-        dump = hardwareMap.servo.get("zip");
+        dumpLeft = hardwareMap.servo.get("dumpLeft");
+        dumpRight = hardwareMap.servo.get("dumpRight");
+        zip = hardwareMap.servo.get("zip");
+
+        // assign the starting position of the wrist and dump
+        zipBool =true;
+        dumpLeftPos = DUMP_L_CLOSE;
+        dumpRightPos = DUMP_R_CLOSE;
 
         // Our code
         straight(6.5);

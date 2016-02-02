@@ -27,9 +27,10 @@ public class ForwardOp extends LinearOpMode {
 		 *    "servo_1" controls the zip joint of the manipulator.
 		 *    "servo_6" controls the dump joint of the manipulator.
 		 */
-        motorRight = hardwareMap.dcMotor.get("motor_2");
-        motorLeft = hardwareMap.dcMotor.get("motor_1");
+        motorRight = hardwareMap.dcMotor.get("right");
+        motorLeft = hardwareMap.dcMotor.get("left");
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
+
 
         motorLeft.setPower(.5);
         motorRight.setPower(.5);
