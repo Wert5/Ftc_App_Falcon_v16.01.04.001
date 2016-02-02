@@ -18,23 +18,25 @@ public class FalconTeleOp extends OpMode {
     // TETRIX VALUES.
     final static double ZIP_MIN_RANGE = 0.00;
     final static double ZIP_MAX_RANGE = 0.50;
+
     final static double COLLECT_MIN_RANGE = 0.00;
     final static double COLLECT_MAX_RANGE = 0.50;
-    final static double DUMP_MIN_RANGE = 0.20;
-    final static double DUMP_MAX_RANGE = 0.7;
+
+    final static double DUMP_L_LEFT = 0.00;
+    final static double DUMP_L_CLOSE = 0.50;
+    final static double DUMP_L_RIGHT = 1.00;
+
+    final static double DUMP_R_LEFT = 0.00;
+    final static double DUMP_R_CLOSE = 0.50;
+    final static double DUMP_R_RIGHT = 1.00;
 
     // position of the zip servo.
     boolean zipBool;
     double zipPosition;
 
-    // amount to change the zip servo position.
-//    double zipDelta = 0.1;
-
-    // position of the dump servo
-    double dumpPosition;
-
-    // amount to change the dump servo position by
-    double dumpDelta = 0.1;
+    // position of the dump servos
+    double dumpLeftPos;
+    double dumpRightPos;
 
     boolean collectBool=false;
     double collectPower=0.0;
@@ -43,7 +45,8 @@ public class FalconTeleOp extends OpMode {
     DcMotor motorLeft;
     DcMotor ballCollect;
     DcMotor extension;
-    Servo dump;
+    Servo dumpLeft;
+    Servo dumpRight;
     Servo zip;
 
     /**
@@ -82,12 +85,14 @@ public class FalconTeleOp extends OpMode {
         extension = hardwareMap.dcMotor.get("extension");
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        zip = hardwareMap.servo.get("dump");
-        dump = hardwareMap.servo.get("zip");
+        dumpLeft = hardwareMap.servo.get("dumpLeft");
+        dumpRight = hardwareMap.servo.get("dumpRight");
+        zip = hardwareMap.servo.get("zip");
 
         // assign the starting position of the wrist and dump
         zipBool =true;
-        dumpPosition = 0.2;
+        dumpLeftPos = DUMP_L_CLOSE;
+        dumpRightPos = DUMP_R_CLOSE;
     }
 
     /*
@@ -118,6 +123,9 @@ public class FalconTeleOp extends OpMode {
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);
 
+
+        float extend = (float)(-0.75*scaleInput(Range.clip(gamepad2.left_stick_y, -1, 1)));
+
         // scale the joystick value to make it easier to control
         // the robot more precisely at slower speeds.
         right = (float)scaleInput(right);
@@ -126,6 +134,7 @@ public class FalconTeleOp extends OpMode {
         // write the values to the motors
         motorRight.setPower(right);
         motorLeft.setPower(left);
+        extension.setPower(extend);
 
         // update the position of the zip.
         if (gamepad1.a) {
@@ -152,20 +161,26 @@ public class FalconTeleOp extends OpMode {
 
         // update the position of the dump
         if (gamepad2.x) {
-            dumpPosition += dumpDelta;
+            dumpLeftPos = DUMP_L_LEFT;
+            dumpRightPos = DUMP_R_LEFT;
+        }else if (gamepad2.b) {
+            dumpLeftPos = DUMP_L_RIGHT;
+            dumpRightPos = DUMP_R_RIGHT;
+        }else{
+            dumpLeftPos = DUMP_L_CLOSE;
+            dumpRightPos = DUMP_R_CLOSE;
         }
 
-        if (gamepad2.b) {
-            dumpPosition -= dumpDelta;
-        }
+
+
 
         // clip the position values so that they never exceed their allowed range.
         zipPosition = Range.clip(zipPosition, ZIP_MIN_RANGE, ZIP_MAX_RANGE);
-        dumpPosition = Range.clip(dumpPosition, DUMP_MIN_RANGE, DUMP_MAX_RANGE);
 
         // write position values to the wrist and dump servo
         zip.setPosition(zipPosition);
-        dump.setPosition(dumpPosition);
+        dumpLeft.setPosition(dumpLeftPos);
+        dumpRight.setPosition(dumpRightPos);
         ballCollect.setPower(collectPower);
 
 
@@ -178,7 +193,8 @@ public class FalconTeleOp extends OpMode {
 		 */
         telemetry.addData("Text", "*** Robot Data***");
         telemetry.addData("zip", "zip:  " + String.format("%.2f", zipPosition));
-        telemetry.addData("dump", "dump:  " + String.format("%.2f", dumpPosition));
+        telemetry.addData("dumpLeft", "dumpL:  " + String.format("%.2f", dumpLeftPos));
+        telemetry.addData("dumpRight", "dumpR:  " + String.format("%.2f", dumpRightPos));
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
         telemetry.addData("collector pwr", "collector pwr: " + String.format("%.2f", collectPower));

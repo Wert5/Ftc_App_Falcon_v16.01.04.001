@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/exploded-aar/RobotCore-release/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="141c9410c57da655ddebd85f577cc6b51811c525">
+        <dex dex="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/pre-dexed/debug/classes-cfeefa37652431b76096ade83563f164fe3667ee.jar" />
+    </item>
+    <item
+        jar="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/exploded-aar/ModernRobotics-release/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ad4adcdf8eb6ff2b3b4fe9f1d676f099db621d60">
+        <dex dex="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/pre-dexed/debug/classes-220d9841e84173845c8ac7dc0e85ce45db9c8333.jar" />
+    </item>
+    <item
+        jar="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/exploded-aar/WirelessP2p-release/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ebf8372b5bc9dc9f596ed438df36481099d51c41">
+        <dex dex="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/pre-dexed/debug/classes-805df9025e3470e62292b57b6f05255653988935.jar" />
+    </item>
+    <item
+        jar="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/exploded-aar/Hardware-release/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1e813cd0f3937ee1d0b272907ce672b7f4ad2ea2">
+        <dex dex="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/pre-dexed/debug/classes-3d628594e006bbf0de80df519ff7439e73dcfeeb.jar" />
+    </item>
+    <item
+        jar="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/exploded-aar/FtcCommon-release/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81c82e1248666e3dba585aa2044cb6f367ec6066">
+        <dex dex="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/pre-dexed/debug/classes-c1870fb7f1606a529b1fe5b7f611be0a612f67c4.jar" />
+    </item>
+    <item
+        jar="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/exploded-aar/Analytics-release/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="23c74caa2b901107adc4d0aec343c5b8e8be86fb">
+        <dex dex="/Users/Winston/Desktop/Robotics2016/Ftc_App_Falcon_v16.01.04.001/FtcRobotController/build/intermediates/pre-dexed/debug/classes-510777fff39dd6c163e8c596b4f58692d3dbdf3d.jar" />
+    </item>
+
+</items>
