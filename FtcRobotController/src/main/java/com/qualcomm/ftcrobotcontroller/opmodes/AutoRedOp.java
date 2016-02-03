@@ -41,7 +41,7 @@ public class AutoRedOp extends LinearOpMode {
     Servo dumpRight;
     Servo zip;
 
-    double TURN_RADIUS=1.417;
+    double TURN_RADIUS=0.709;
     double WHEEL_RADIUS=0.166;
     double FULL_RPM=50.667;
 
@@ -106,7 +106,7 @@ public class AutoRedOp extends LinearOpMode {
             motorRight.setPower(0.5);
         }
 
-        sleep((long)((Math.PI*TURN_RADIUS*Math.abs(degrees)/180)/(Math.PI*2*WHEEL_RADIUS)/(FULL_RPM*0.5*60000)));
+        sleep((long)((Math.PI*TURN_RADIUS*Math.abs(degrees)/180)/(Math.PI*2*WHEEL_RADIUS)/(FULL_RPM*0.5/60000)));
 
         motorLeft.setPower(0);
         motorRight.setPower(0);
@@ -121,7 +121,7 @@ public class AutoRedOp extends LinearOpMode {
             motorRight.setPower(-0.5);
         }
 
-        sleep((long)(distance/(Math.PI*2*WHEEL_RADIUS)/(FULL_RPM*0.5*60000)));
+        sleep((long)(0.6*distance/(Math.PI*2*WHEEL_RADIUS)/(FULL_RPM*0.5/60000)));
 
         motorLeft.setPower(0);
         motorRight.setPower(0);

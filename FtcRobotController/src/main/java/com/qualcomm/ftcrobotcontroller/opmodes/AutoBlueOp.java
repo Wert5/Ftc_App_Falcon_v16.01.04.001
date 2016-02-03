@@ -37,9 +37,9 @@ public class AutoBlueOp extends LinearOpMode {
     Servo dumpRight;
     Servo zip;
 
-    double TURN_RADIUS=1.417;
+    double TURN_RADIUS=0.709;
     double WHEEL_RADIUS=0.166;
-    double FULL_RPM=50.667;
+    double FULL_RPM=50.333;
 
     public void runOpMode() throws InterruptedException{
 		/*
@@ -60,7 +60,7 @@ public class AutoBlueOp extends LinearOpMode {
 		 */
         motorRight = hardwareMap.dcMotor.get("right");
         motorLeft = hardwareMap.dcMotor.get("left");
-        ballCollect = hardwareMap.dcMotor.get("ballCollect");
+        /*ballCollect = hardwareMap.dcMotor.get("ballCollect");
         extension = hardwareMap.dcMotor.get("extension");
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
@@ -71,7 +71,7 @@ public class AutoBlueOp extends LinearOpMode {
         // assign the starting position of the wrist and dump
         zipBool =true;
         dumpLeftPos = DUMP_L_CLOSE;
-        dumpRightPos = DUMP_R_CLOSE;
+        dumpRightPos = DUMP_R_CLOSE;*/
 
         // Our code
         straight(6.5);
@@ -93,7 +93,7 @@ public class AutoBlueOp extends LinearOpMode {
             motorRight.setPower(0.5);
         }
 
-        sleep((long)((Math.PI*TURN_RADIUS*Math.abs(degrees)/180)/(Math.PI*2*WHEEL_RADIUS)/(FULL_RPM*0.5*60000)));
+        sleep((long)((TURN_RADIUS*Math.abs(degrees)/180)/(2*WHEEL_RADIUS)/(FULL_RPM*0.5/60000)));
 
         motorLeft.setPower(0);
         motorRight.setPower(0);
@@ -108,7 +108,7 @@ public class AutoBlueOp extends LinearOpMode {
             motorRight.setPower(-0.5);
         }
 
-        sleep((long)(distance/(Math.PI*2*WHEEL_RADIUS)/(FULL_RPM*0.5*60000)));
+        sleep((long)((0.6*distance/(Math.PI*2*WHEEL_RADIUS))/(FULL_RPM*0.5/60000)));
 
         motorLeft.setPower(0);
         motorRight.setPower(0);

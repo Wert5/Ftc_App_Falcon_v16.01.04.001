@@ -32,10 +32,10 @@ public class ForwardOp extends LinearOpMode {
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
 
-        motorLeft.setPower(.5);
-        motorRight.setPower(.5);
+        motorLeft.setPower(-0.5);
+        motorRight.setPower(0.5);
 
-        sleep(2000);
+        sleep(2543);
 
         motorLeft.setPower(0);
         motorRight.setPower(0);
