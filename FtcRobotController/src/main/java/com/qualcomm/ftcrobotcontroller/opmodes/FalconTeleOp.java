@@ -126,7 +126,7 @@ public class FalconTeleOp extends OpMode {
         left = Range.clip(left, -1, 1);
 
 
-        float extend = (float)(-0.75*scaleInput(Range.clip(gamepad2.left_stick_y, -1, 1)));
+        float extend = (float)(0.25*scaleInput(Range.clip(gamepad2.left_stick_y, -1, 1)));
 
         // scale the joystick value to make it easier to control
         // the robot more precisely at slower speeds.
@@ -180,7 +180,12 @@ public class FalconTeleOp extends OpMode {
         //zip.setPosition(zipPosition);
         //dumpLeft.setPosition(dumpLeftPos);
         //dumpRight.setPosition(dumpRightPos);
-        collectPower=scaleInput(gamepad1.right_trigger);
+        if(gamepad1.left_trigger>0.7){
+            collectPower=1;
+        }else{
+            collectPower=0.75*scaleInput(gamepad1.right_trigger);
+        }
+
         ballCollect.setPower(collectPower);
 
 
