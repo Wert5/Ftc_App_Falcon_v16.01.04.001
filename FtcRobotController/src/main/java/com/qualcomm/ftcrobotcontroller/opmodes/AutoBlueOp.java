@@ -22,7 +22,7 @@ public class AutoBlueOp extends LinearOpMode {
     final static double DUMP_R_CLOSE = 0.50;
     final static double DUMP_R_RIGHT = 1.00;
 
-    // position of the zipLeft servo.
+    // position of the zip servo.
     boolean zipBool;
 
     // position of the dump servos
@@ -55,7 +55,7 @@ public class AutoBlueOp extends LinearOpMode {
 		 *   "motor_2" is on the left side of the bot.
 		 *
 		 * We also assume that there are two servos "servo_1" and "servo_6"
-		 *    "servo_1" controls the zipLeft joint of the manipulator.
+		 *    "servo_1" controls the zip joint of the manipulator.
 		 *    "servo_6" controls the dump joint of the manipulator.
 		 */
         motorRight = hardwareMap.dcMotor.get("right");
@@ -66,7 +66,7 @@ public class AutoBlueOp extends LinearOpMode {
 
         dumpLeft = hardwareMap.servo.get("dumpLeft");
         dumpRight = hardwareMap.servo.get("dumpRight");
-        zipLeft = hardwareMap.servo.get("zipLeft");
+        zip = hardwareMap.servo.get("zip");
 
         // assign the starting position of the wrist and dump
         zipBool =true;

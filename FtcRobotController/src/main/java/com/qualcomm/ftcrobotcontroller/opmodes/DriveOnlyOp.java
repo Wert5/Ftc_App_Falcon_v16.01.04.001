@@ -12,7 +12,7 @@ public class DriveOnlyOp extends OpMode {
 
     /*
      * Note: the configuration of the servos is such that
-     * as the zipLeft servo approaches 0, the zipLeft position moves up (away from the floor).
+     * as the zip servo approaches 0, the zip position moves up (away from the floor).
      * Also, as the dump servo approaches 0, the dump opens up (drops the game element).
      */
     // TETRIX VALUES.
@@ -23,11 +23,11 @@ public class DriveOnlyOp extends OpMode {
     final static double DUMP_MIN_RANGE = 0.20;
     final static double DUMP_MAX_RANGE = 0.7;
 
-    // position of the zipLeft servo.
+    // position of the zip servo.
     boolean zipBool;
     double zipPosition;
 
-    // amount to change the zipLeft servo position.
+    // amount to change the zip servo position.
 //    double zipDelta = 0.1;
 
     // position of the dump servo
@@ -73,7 +73,7 @@ public class DriveOnlyOp extends OpMode {
 		 *   "motor_2" is on the left side of the bot.
 		 *
 		 * We also assume that there are two servos "servo_1" and "servo_6"
-		 *    "servo_1" controls the zipLeft joint of the manipulator.
+		 *    "servo_1" controls the zip joint of the manipulator.
 		 *    "servo_6" controls the dump joint of the manipulator.
 		 */
         motorRight = hardwareMap.dcMotor.get("right");
@@ -82,8 +82,8 @@ public class DriveOnlyOp extends OpMode {
         //extension = hardwareMap.dcMotor.get("extension");
         //motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        //zipLeft = hardwareMap.servo.get("dump");
-        //dump = hardwareMap.servo.get("zipLeft");
+        //zip = hardwareMap.servo.get("dump");
+        //dump = hardwareMap.servo.get("zip");
 
         // assign the starting position of the wrist and dump
         zipBool =true;
@@ -127,9 +127,9 @@ public class DriveOnlyOp extends OpMode {
         motorRight.setPower(right);
         motorLeft.setPower(left);
 
-        // update the position of the zipLeft.
+        // update the position of the zip.
         if (gamepad1.a) {
-            // if the A button is pushed on gamepad1, change the position of zipLeft
+            // if the A button is pushed on gamepad1, change the position of zip
             if(zipBool){
                 zipPosition=ZIP_MIN_RANGE;
                 zipBool=!zipBool;
@@ -140,7 +140,7 @@ public class DriveOnlyOp extends OpMode {
         }
 
         if (gamepad1.right_trigger>0.5) {
-            // if the right trigger is pushed on gamepad1, change the position of zipLeft
+            // if the right trigger is pushed on gamepad1, change the position of zip
             if(collectBool){
                 collectPower=COLLECT_MIN_RANGE;
                 collectBool=!collectBool;
@@ -164,7 +164,7 @@ public class DriveOnlyOp extends OpMode {
         dumpPosition = Range.clip(dumpPosition, DUMP_MIN_RANGE, DUMP_MAX_RANGE);
 
         // write position values to the wrist and dump servo
-        //zipLeft.setPosition(zipPosL);
+        //zip.setPosition(zipPosL);
         //dump.setPosition(dumpPosition);
         //ballCollect.setPower(collectPower);
 
@@ -177,7 +177,7 @@ public class DriveOnlyOp extends OpMode {
 		 * are currently write only.
 		 */
         telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("zipLeft", "zipLeft:  " + String.format("%.2f", zipPosition));
+        telemetry.addData("zip", "zip:  " + String.format("%.2f", zipPosition));
         telemetry.addData("dump", "dump:  " + String.format("%.2f", dumpPosition));
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
