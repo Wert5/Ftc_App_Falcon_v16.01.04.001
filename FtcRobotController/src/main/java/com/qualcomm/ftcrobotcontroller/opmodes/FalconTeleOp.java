@@ -121,6 +121,11 @@ public class FalconTeleOp extends OpMode {
         float right = throttle - direction;
         float left = throttle + direction;
 
+        if(gamepad1.left_bumper){
+            right *=0.2;
+            left *=0.2;
+        }
+
         // clip the right/left values so that the values never exceed +/- 1
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);
@@ -158,6 +163,7 @@ public class FalconTeleOp extends OpMode {
             dumpLeftPos = DUMP_L_CLOSE;
             dumpRightPos = DUMP_R_CLOSE;
         }
+        
         if(gamepad1.left_trigger>0.2){
             collectPower=-0.75*scaleInput(gamepad1.left_trigger);
         }else if(gamepad1.right_trigger>0.2){
