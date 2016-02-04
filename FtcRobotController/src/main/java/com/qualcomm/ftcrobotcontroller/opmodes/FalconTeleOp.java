@@ -190,7 +190,7 @@ public class FalconTeleOp extends OpMode {
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
         telemetry.addData("collector pwr", "collector pwr: " + String.format("%.2f", collectPower));
         telemetry.addData("extension pwr", "extension pwr: " + String.format("%.2f", collectPower));
-        telemetry.addData("zip", "zip:  " + String.format("%.2f", zipPosL));
+        telemetry.addData("zip", "zip:  " + String.format("%.2f", zipPos));
 
     }
 
