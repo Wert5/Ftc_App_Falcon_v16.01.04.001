@@ -90,7 +90,6 @@ public class FalconTeleOp extends OpMode {
         //zip = hardwareMap.servo.get("zip");
 
         // assign the starting position of the wrist and dump
-        zipPosL = ZIP_LEFT;
         zipPos = ZIP_LEFT;
         dumpLeftPos = DUMP_L_CLOSE;
         dumpRightPos = DUMP_R_CLOSE;
