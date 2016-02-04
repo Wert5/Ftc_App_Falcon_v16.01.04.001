@@ -162,6 +162,8 @@ public class FalconTeleOp extends OpMode {
             collectPower=-0.75*scaleInput(gamepad1.left_trigger);
         }else if(gamepad1.right_trigger>0.2){
             collectPower=0.75*scaleInput(gamepad1.right_trigger);
+        }else{
+            collectPower=0;
         }
 
         // write position values to the wrist and dump servo
@@ -188,7 +190,7 @@ public class FalconTeleOp extends OpMode {
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
         telemetry.addData("collector pwr", "collector pwr: " + String.format("%.2f", collectPower));
-        telemetry.addData("extension pwr", "extension pwr: " + String.format("%.2f", collectPower));
+        telemetry.addData("extension pwr", "extension pwr: " + String.format("%.2f", extend));
         telemetry.addData("zip", "zip:  " + String.format("%.2f", zipPos));
 
     }
