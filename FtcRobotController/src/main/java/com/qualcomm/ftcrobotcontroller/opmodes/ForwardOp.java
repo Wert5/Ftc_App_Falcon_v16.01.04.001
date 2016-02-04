@@ -24,7 +24,7 @@ public class ForwardOp extends LinearOpMode {
 		 *   "motor_2" is on the left side of the bot.
 		 *
 		 * We also assume that there are two servos "servo_1" and "servo_6"
-		 *    "servo_1" controls the zip joint of the manipulator.
+		 *    "servo_1" controls the zipLeft joint of the manipulator.
 		 *    "servo_6" controls the dump joint of the manipulator.
 		 */
         motorRight = hardwareMap.dcMotor.get("right");

@@ -12,7 +12,7 @@ public class FalconTeleOp extends OpMode {
 
     /*
      * Note: the configuration of the servos is such that
-     * as the zip servo approaches 0, the zip position moves up (away from the floor).
+     * as the zipLeft servo approaches 0, the zipLeft position moves up (away from the floor).
      * Also, as the dump servo approaches 0, the dump opens up (drops the game element).
      */
     // TETRIX VALUES.
@@ -30,9 +30,9 @@ public class FalconTeleOp extends OpMode {
     final static double DUMP_R_CLOSE = 0.50;
     final static double DUMP_R_RIGHT = 1.00;
 
-    // position of the zip servo.
-    boolean zipBool;
-    double zipPosition;
+    // position of the zipLeft servo.
+    double zipPosR;
+    double zipPosL;
 
     // position of the dump servos
     double dumpLeftPos;
@@ -47,7 +47,8 @@ public class FalconTeleOp extends OpMode {
     DcMotor extension;
     Servo dumpLeft;
     Servo dumpRight;
-    Servo zip;
+    Servo zipLeft;
+    Servo zipRight;
 
     /**
      * Constructor
@@ -76,7 +77,7 @@ public class FalconTeleOp extends OpMode {
 		 *   "motor_2" is on the left side of the bot.
 		 *
 		 * We also assume that there are two servos "servo_1" and "servo_6"
-		 *    "servo_1" controls the zip joint of the manipulator.
+		 *    "servo_1" controls the zipLeft joint of the manipulator.
 		 *    "servo_6" controls the dump joint of the manipulator.
 		 */
         motorRight = hardwareMap.dcMotor.get("right");
@@ -87,10 +88,11 @@ public class FalconTeleOp extends OpMode {
 
         //dumpLeft = hardwareMap.servo.get("dumpLeft");
         //dumpRight = hardwareMap.servo.get("dumpRight");
-        //zip = hardwareMap.servo.get("zip");
+        //zipLeft = hardwareMap.servo.get("zipLeft");
 
         // assign the starting position of the wrist and dump
-        zipBool =true;
+        zipPosL =ZIP_MIN_RANGE;
+        zipPosR =ZIP_MIN_RANGE;
         dumpLeftPos = DUMP_L_CLOSE;
         dumpRightPos = DUMP_R_CLOSE;
 
@@ -138,25 +140,15 @@ public class FalconTeleOp extends OpMode {
         motorLeft.setPower(left);
         extension.setPower(extend);
 
-        // update the position of the zip.
-        if (gamepad1.a) {
-            // if the A button is pushed on gamepad1, change the position of zip
-            if(zipBool){
-                zipPosition=ZIP_MIN_RANGE;
-                zipBool=!zipBool;
-            }else{
-                zipPosition=ZIP_MAX_RANGE;
-                zipBool=!zipBool;
-            }
+        if (gamepad2.dpad_down) {
+            zipPosL =ZIP_MIN_RANGE;
+            zipPosR =ZIP_MIN_RANGE;
+        }else if(gamepad2.dpad_left){
+            zipPosL =ZIP_MAX_RANGE;
+        }else if(gamepad2.dpad_right){
+            zipPosR =ZIP_MAX_RANGE;
         }
 
-        /*if (gamepad1.right_trigger>0.5) {
-            // if the right trigger is pushed on gamepad1, change the position of zip
-            collectPower=COLLECT_MAX_RANGE;
-
-        }else{
-            collectPower=COLLECT_MIN_RANGE;
-        }*/
 
         // update the position of the dump
         if (gamepad2.x) {
@@ -169,22 +161,18 @@ public class FalconTeleOp extends OpMode {
             dumpLeftPos = DUMP_L_CLOSE;
             dumpRightPos = DUMP_R_CLOSE;
         }
-
-
-
-
-        // clip the position values so that they never exceed their allowed range.
-        zipPosition = Range.clip(zipPosition, ZIP_MIN_RANGE, ZIP_MAX_RANGE);
-
-        // write position values to the wrist and dump servo
-        //zip.setPosition(zipPosition);
-        //dumpLeft.setPosition(dumpLeftPos);
-        //dumpRight.setPosition(dumpRightPos);
-        if(gamepad1.left_trigger>0.7){
-            collectPower=1;
-        }else{
+        if(gamepad1.left_trigger>0.2){
+            collectPower=-0.75*scaleInput(gamepad1.left_trigger);
+        }else if(gamepad1.right_trigger>0.2){
             collectPower=0.75*scaleInput(gamepad1.right_trigger);
         }
+        
+        // write position values to the wrist and dump servo
+        //zipLeft.setPosition(zipPosL);
+        //zipRight.setPosition(zipPosR);
+        //dumpLeft.setPosition(dumpLeftPos);
+        //dumpRight.setPosition(dumpRightPos);
+
 
         ballCollect.setPower(collectPower);
 
@@ -204,7 +192,7 @@ public class FalconTeleOp extends OpMode {
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
         telemetry.addData("collector pwr", "collector pwr: " + String.format("%.2f", collectPower));
         telemetry.addData("extension pwr", "extension pwr: " + String.format("%.2f", collectPower));
-        telemetry.addData("zip", "zip:  " + String.format("%.2f", zipPosition));
+        telemetry.addData("zipLeft", "zipLeft:  " + String.format("%.2f", zipPosL));
 
     }
 
