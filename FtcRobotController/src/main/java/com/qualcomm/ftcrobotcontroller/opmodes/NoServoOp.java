@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by Winston on 1/30/16.
  */
-public class FalconTeleOp extends OpMode {
+public class NoServoOp extends OpMode {
 
     /*
      * Note: the configuration of the servos is such that
@@ -18,8 +18,8 @@ public class FalconTeleOp extends OpMode {
     // TETRIX VALUES.
     final static double ZIP_IN_R = 0.40;
     final static double ZIP_OUT_R = 0.90;
-    final static double ZIP_IN_L = 0.15;
-    final static double ZIP_OUT_L = 0.60;
+    final static double ZIP_IN_L = 0.40;
+    final static double ZIP_OUT_L = 0.90;
 
     final static double COLLECT_MIN_RANGE = 0.00;
     final static double COLLECT_MAX_RANGE = 0.75;
@@ -36,7 +36,7 @@ public class FalconTeleOp extends OpMode {
     final static double DUMP_R_RIGHT = 1.00;
 
     final static double DUMP_FRONT_CLOSED = 0.00;
-    final static double DUMP_FRONT_OPEN = 0.25;
+    final static double DUMP_FRONT_OPEN = 0.50;
 
     // position of the zip servo.
     double zipPosL;
@@ -64,7 +64,7 @@ public class FalconTeleOp extends OpMode {
     /**
      * Constructor
      */
-    public FalconTeleOp() {
+    public NoServoOp() {
 
     }
 
@@ -97,12 +97,12 @@ public class FalconTeleOp extends OpMode {
         extension = hardwareMap.dcMotor.get("extension");
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        dumpLeft = hardwareMap.servo.get("dumpLeft");
-        dumpRight = hardwareMap.servo.get("dumpRight");
+        //dumpLeft = hardwareMap.servo.get("dumpLeft");
+        //dumpRight = hardwareMap.servo.get("dumpRight");
         //dumpFront = hardwareMap.servo.get("dumpFront");
-        zipR = hardwareMap.servo.get("zipR");
-        zipL = hardwareMap.servo.get("zipL");
-        climberArm = hardwareMap.servo.get("climber");
+        //zipR = hardwareMap.servo.get("zipR");
+        //zipL = hardwareMap.servo.get("zipL");
+        //climberArm = hardwareMap.servo.get("climber");
 
         // assign the starting position of the wrist and dump
 
@@ -195,7 +195,7 @@ public class FalconTeleOp extends OpMode {
         }else if (gamepad2.a) {
             dumpFrontPos = DUMP_FRONT_CLOSED;
         }
-        
+
         if(gamepad1.left_trigger>0.2){
             collectPower=-0.75*scaleInput(gamepad1.left_trigger);
         }else if(gamepad1.right_trigger>0.2){
@@ -205,11 +205,11 @@ public class FalconTeleOp extends OpMode {
         }
 
         // write position values to the wrist and dump servo
-        zipR.setPosition(zipPosR);
-        zipL.setPosition(zipPosL);
-        climberArm.setPosition(climberPos);
-        dumpLeft.setPosition(dumpLeftPos);
-        dumpRight.setPosition(dumpRightPos);
+        //zipR.setPosition(zipPosR);
+        //zipL.setPosition(zipPosL);
+        //climberArm.setPosition(climberPos);
+        //dumpLeft.setPosition(dumpLeftPos);
+        //dumpRight.setPosition(dumpRightPos);
         //dumpFront.setPosition(dumpFrontPos);
 
         motorRight.setPower(right);

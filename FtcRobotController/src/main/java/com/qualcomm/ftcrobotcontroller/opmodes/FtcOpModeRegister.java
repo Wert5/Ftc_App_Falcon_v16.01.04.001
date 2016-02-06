@@ -67,6 +67,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register ("AutoRed", AutoRedOp.class);
     manager.register ("FalconTeleOp", FalconTeleOp.class);
     manager.register ("DriveOnlyOp", DriveOnlyOp.class);
+    manager.register ("NoServoOp", NoServoOp.class);
 
 
     /*
