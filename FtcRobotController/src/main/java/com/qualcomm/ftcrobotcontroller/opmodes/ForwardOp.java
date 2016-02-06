@@ -35,7 +35,7 @@ public class ForwardOp extends LinearOpMode {
         motorLeft.setPower(-0.5);
         motorRight.setPower(0.5);
 
-        sleep(2543);
+        sleep(2492);
 
         motorLeft.setPower(0);
         motorRight.setPower(0);

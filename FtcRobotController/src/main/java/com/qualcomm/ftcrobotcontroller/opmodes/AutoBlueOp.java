@@ -8,11 +8,15 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by Winston on 1/30/16.
  */
 public class AutoBlueOp extends LinearOpMode {
-    final static double ZIP_MIN_RANGE = 0.00;
-    final static double ZIP_MAX_RANGE = 0.50;
+    final static double ZIP_LEFT = 0.00;
+    final static double ZIP_CENTER = 0.50;
+    final static double ZIP_RIGHT = 1;
 
     final static double COLLECT_MIN_RANGE = 0.00;
-    final static double COLLECT_MAX_RANGE = 0.50;
+    final static double COLLECT_MAX_RANGE = 0.75;
+
+    final static double CLIMBER_MIN_RANGE = 0.00;
+    final static double CLIMBER_MAX_RANGE = 1.00;
 
     final static double DUMP_L_LEFT = 0.00;
     final static double DUMP_L_CLOSE = 0.50;
@@ -23,11 +27,15 @@ public class AutoBlueOp extends LinearOpMode {
     final static double DUMP_R_RIGHT = 1.00;
 
     // position of the zip servo.
-    boolean zipBool;
+    double zipPos;
+    double climberPos;
 
     // position of the dump servos
     double dumpLeftPos;
     double dumpRightPos;
+
+    boolean collectBool=false;
+    double collectPower=0.0;
 
     DcMotor motorRight;
     DcMotor motorLeft;
@@ -36,6 +44,7 @@ public class AutoBlueOp extends LinearOpMode {
     Servo dumpLeft;
     Servo dumpRight;
     Servo zip;
+    Servo climberArm;
 
     double TURN_RADIUS=0.709;
     double WHEEL_RADIUS=0.166;
@@ -60,18 +69,22 @@ public class AutoBlueOp extends LinearOpMode {
 		 */
         motorRight = hardwareMap.dcMotor.get("right");
         motorLeft = hardwareMap.dcMotor.get("left");
-        /*ballCollect = hardwareMap.dcMotor.get("ballCollect");
+        ballCollect = hardwareMap.dcMotor.get("ballCollect");
         extension = hardwareMap.dcMotor.get("extension");
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
 
-        dumpLeft = hardwareMap.servo.get("dumpLeft");
-        dumpRight = hardwareMap.servo.get("dumpRight");
-        zip = hardwareMap.servo.get("zip");
+        //dumpLeft = hardwareMap.servo.get("dumpLeft");
+        //dumpRight = hardwareMap.servo.get("dumpRight");
+        //zip = hardwareMap.servo.get("zip");
+        //climberArm = hardwareMap.servo.get("climber");
 
         // assign the starting position of the wrist and dump
-        zipBool =true;
+        zipPos = ZIP_LEFT;
+        climberPos=CLIMBER_MIN_RANGE;
         dumpLeftPos = DUMP_L_CLOSE;
-        dumpRightPos = DUMP_R_CLOSE;*/
+        dumpRightPos = DUMP_R_CLOSE;
+
+        collectPower=COLLECT_MIN_RANGE;
 
         // Our code
         straight(6.5);
@@ -93,7 +106,7 @@ public class AutoBlueOp extends LinearOpMode {
             motorRight.setPower(0.5);
         }
 
-        sleep((long)((TURN_RADIUS*Math.abs(degrees)/180)/(2*WHEEL_RADIUS)/(FULL_RPM*0.5/60000)));
+        sleep((long)((0.98*TURN_RADIUS*Math.abs(degrees)/180)/(2*WHEEL_RADIUS)/(FULL_RPM*0.5/60000)));
 
         motorLeft.setPower(0);
         motorRight.setPower(0);

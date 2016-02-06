@@ -17,11 +17,14 @@ public class FalconTeleOp extends OpMode {
      */
     // TETRIX VALUES.
     final static double ZIP_LEFT = 0.00;
-    final static double ZIP_Center = 0.50;
+    final static double ZIP_CENTER = 0.50;
     final static double ZIP_RIGHT = 1;
 
     final static double COLLECT_MIN_RANGE = 0.00;
-    final static double COLLECT_MAX_RANGE = 0.50;
+    final static double COLLECT_MAX_RANGE = 0.75;
+
+    final static double CLIMBER_MIN_RANGE = 0.00;
+    final static double CLIMBER_MAX_RANGE = 1.00;
 
     final static double DUMP_L_LEFT = 0.00;
     final static double DUMP_L_CLOSE = 0.50;
@@ -33,6 +36,7 @@ public class FalconTeleOp extends OpMode {
 
     // position of the zip servo.
     double zipPos;
+    double climberPos;
 
     // position of the dump servos
     double dumpLeftPos;
@@ -48,6 +52,7 @@ public class FalconTeleOp extends OpMode {
     Servo dumpLeft;
     Servo dumpRight;
     Servo zip;
+    Servo climberArm;
 
     /**
      * Constructor
@@ -88,9 +93,11 @@ public class FalconTeleOp extends OpMode {
         //dumpLeft = hardwareMap.servo.get("dumpLeft");
         //dumpRight = hardwareMap.servo.get("dumpRight");
         //zip = hardwareMap.servo.get("zip");
+        //climberArm = hardwareMap.servo.get("climber");
 
         // assign the starting position of the wrist and dump
         zipPos = ZIP_LEFT;
+        climberPos=CLIMBER_MIN_RANGE;
         dumpLeftPos = DUMP_L_CLOSE;
         dumpRightPos = DUMP_R_CLOSE;
 
@@ -144,11 +151,17 @@ public class FalconTeleOp extends OpMode {
         extension.setPower(extend);
 
         if (gamepad2.dpad_down) {
-            zipPos = ZIP_Center;
+            zipPos = ZIP_CENTER;
         }else if(gamepad2.dpad_left){
             zipPos = ZIP_LEFT;
         }else if(gamepad2.dpad_right){
             zipPos = ZIP_RIGHT;
+        }
+
+        if (gamepad2.a) {
+            climberPos = CLIMBER_MAX_RANGE;
+        }else {
+            climberPos = CLIMBER_MIN_RANGE;
         }
 
 
@@ -174,7 +187,7 @@ public class FalconTeleOp extends OpMode {
 
         // write position values to the wrist and dump servo
         //zip.setPosition(zipPosL);
-        //zipRight.setPosition(zipPos);
+        //climberArm.setPosition(climberPos);
         //dumpLeft.setPosition(dumpLeftPos);
         //dumpRight.setPosition(dumpRightPos);
 
